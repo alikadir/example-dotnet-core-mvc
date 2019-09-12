@@ -1,4 +1,4 @@
-#dotnet cli & entity framework
+# dotnet cli & entity framework
 
 `dotnet new mvc -n FirstDotnetCoreMVC`
 <br/>
