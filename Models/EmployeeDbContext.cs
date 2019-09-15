@@ -8,6 +8,8 @@ namespace FirstDotnetCoreMVC.Models
         {
         }
 
+        
+        
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeDetail> EmployeeDetails { get; set; }
         public DbSet<EmployeeAddress> EmployeeAddress { get; set; }

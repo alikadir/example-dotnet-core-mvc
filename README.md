@@ -14,6 +14,11 @@ after create DbContext & Entities and also each changes, you should apply the fl
 
 `dotnet ef database update`
 
+if you use ConnectionString in EnvironmentVariables. 
+before execute database update, you should apply the flowing code
+
+$Env:ASPNETCORE_DB_PATH="--"
+
 ## run & build
 
 `dotnet build`

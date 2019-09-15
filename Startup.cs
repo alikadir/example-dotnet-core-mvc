@@ -16,23 +16,15 @@ namespace FirstDotnetCoreMVC
 {
     public class Startup
     {
-        public static string MyConn = "First value";
+        public static string MyCon = "First value";
+       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            MyConn = Configuration.GetConnectionString("MyConn");
+            MyCon = Environment.GetEnvironmentVariable("ASPNETCORE_DB_PATH");
         }
 
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
-        }
+      
         
         public IConfiguration Configuration { get; }
 
@@ -49,9 +41,11 @@ namespace FirstDotnetCoreMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+Console.WriteLine("gelen connection");
+Console.WriteLine(MyCon);
 
-            services.AddDbContext<EmployeeDbContext>(item =>
-                item.UseSqlServer(Configuration.GetConnectionString("MyConn")));
+services.AddDbContext<EmployeeDbContext>(item =>
+                item.UseSqlServer(MyCon));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

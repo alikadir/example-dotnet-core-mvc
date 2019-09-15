@@ -11,4 +11,34 @@
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.csproj.ResolveComReference.cache" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <IntermediateAssembly Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.dll" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <_DebugSymbolsIntermediatePath Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.pdb" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <_DeploymentManifestEntryPoint Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.dll" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ApplicationManifest Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.dll.manifest" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <DeployManifest Remove="obj\Debug\netcoreapp2.2\FirstDotnetCoreMVC.application" />
+    </ItemGroup>
+
 </Project>

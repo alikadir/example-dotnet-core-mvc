@@ -20,7 +20,8 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_DB_PATH": "server=localhost\\SQLEXPRESS; database=EmployeeDBx; Trusted_Connection=True;"
       }
     }
   }
