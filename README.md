@@ -40,9 +40,9 @@ _if you have a compiled project (attention! don't use run command)_
 install the heroku cli and then apply `heroku login` command in the project folder in your local machine
 
 _if you have a heroku application_  
-`heroku git:remote -a first-dotnet-core-mvc`
+`heroku git:remote -a akb-first-dotnet-core-mvc`
 _<br> or <br>_ 
-`heroku create first-dotnet-core-mvc`
+`heroku create akb-first-dotnet-core-mvc`
 
 just one time apply flow command for each application  
 `heroku buildpacks:set jincod/dotnetcore`
@@ -55,6 +55,16 @@ for the deploy to this application just apply flowing command
 
 `heroku auth:token` get token for using in CI machine  
 `$Env:HEROKU_API_KEY = "token"`
+
+## scaffold
+
+`dotnet tool install -g dotnet-aspnet-codegenerator`   
+`dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design`   
+`dotnet restore`   
+`dotnet aspnet-codegenerator controller -name EmployeeController -m Employee -dc EmployeeDbContext --rel
+ativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries`
+
+
 
 
 

@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FirstDotnetCoreMVC.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCommand : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace FirstDotnetCoreMVC.Migrations
                 columns: table => new
                 {
                     EmployeeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -26,7 +26,7 @@ namespace FirstDotnetCoreMVC.Migrations
                 columns: table => new
                 {
                     EmployeeAddressId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Country = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Region = table.Column<string>(nullable: true),
@@ -49,7 +49,7 @@ namespace FirstDotnetCoreMVC.Migrations
                 columns: table => new
                 {
                     EmployeeDetailId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BirthDay = table.Column<DateTime>(nullable: false),
                     HasFamily = table.Column<bool>(nullable: false),
                     ChildCount = table.Column<int>(nullable: true),

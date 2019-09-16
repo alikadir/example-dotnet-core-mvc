@@ -17,15 +17,14 @@ namespace FirstDotnetCoreMVC
     public class Startup
     {
         public static string MyCon = "First value";
-       
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             MyCon = Environment.GetEnvironmentVariable("ASPNETCORE_DB_PATH");
         }
 
-      
-        
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -41,11 +40,17 @@ namespace FirstDotnetCoreMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-Console.WriteLine("gelen connection");
-Console.WriteLine(MyCon);
+            Console.WriteLine("gelen connection");
+            Console.WriteLine(MyCon);
 
-services.AddDbContext<EmployeeDbContext>(item =>
+            
+            services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
+            
+            
+            /*
+            services.AddDbContext<EmployeeDbContext>(item =>
                 item.UseSqlServer(MyCon));
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
