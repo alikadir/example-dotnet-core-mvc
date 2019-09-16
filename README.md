@@ -59,8 +59,11 @@ for the deploy to this application just apply flowing command
 ## scaffold
 
 `dotnet tool install -g dotnet-aspnet-codegenerator`   
-`dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design`   
+
+`dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design`  
+ 
 `dotnet restore`   
+
 `dotnet aspnet-codegenerator controller -name EmployeeController -m Employee -dc EmployeeDbContext --rel
 ativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries`
 

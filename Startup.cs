@@ -47,10 +47,9 @@ namespace FirstDotnetCoreMVC
             services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
             
             
-            /*
-            services.AddDbContext<EmployeeDbContext>(item =>
-                item.UseSqlServer(MyCon));
-            */
+            
+            // services.AddDbContext<EmployeeDbContext>(item =>item.UseSqlServer(MyCon));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
