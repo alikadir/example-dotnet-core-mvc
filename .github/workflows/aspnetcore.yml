@@ -15,7 +15,7 @@ jobs:
         dotnet-version: 2.2.108
     - name: Heroku Install
       run: | 
-        snap install --classic heroku
+        sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
         heroku git:remote -a akb-first-dotnet-core-mvc
         git push heroku master
     - name: Build with dotnet
