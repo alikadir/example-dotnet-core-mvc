@@ -1,4 +1,4 @@
-![](https://github.com/alikadir/first-dotnet-core-mvc/.github/workflows/aspnetcore.yml/badge.svg)
+![](https://raw.githubusercontent.com/alikadir/first-dotnet-core-mvc/.github/workflows/aspnetcore.yml/badge.svg)
 
 # dotnet cli & entity framework 
 
