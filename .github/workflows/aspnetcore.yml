@@ -5,7 +5,7 @@ on: [push]
 jobs:	
   build:	
 
-    runs-on: ubuntu-latest	
+    runs-on: macOS-latest	
 
     steps:	
     - uses: actions/checkout@v1	
@@ -15,18 +15,16 @@ jobs:
         dotnet-version: 2.2.108	  
     - name: Build with dotnet	
       run: dotnet build --configuration Release
-    - name: Login to Heroku     
-      uses: actions/heroku@master
+    - name: Setup Heroku
+      run: brew tap heroku/brew && brew install heroku
+    - name: Login to Heroku
+      run: heroku login
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: login
-    - name: Remote add
-      uses: actions/heroku@master
+    - name: Add Remote
+      run: heroku git:remote -a akb-first-dotnet-core-mvc
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: git:remote -a akb-first-dotnet-core-mvc
     - name: View git remotes
       run: git remote -v
     - name: Push to Heroku
