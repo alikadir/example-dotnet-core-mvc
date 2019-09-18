@@ -24,6 +24,7 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        args:  git:remote -a akb-first-dotnet-core-mvc
+        args: git:remote -a akb-first-dotnet-core-mvc
     - name: Push to Heroku
+      run: git remote -v
       run: git push heroku master
