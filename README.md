@@ -1,3 +1,5 @@
+![](https://github.com/alikadir/first-dotnet-core-mvc/.github/workflows/aspnetcore.yml/badge.svg)
+
 # dotnet cli & entity framework 
 
 `dotnet new mvc -n FirstDotnetCoreMVC`
