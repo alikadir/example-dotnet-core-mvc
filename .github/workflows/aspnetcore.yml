@@ -23,6 +23,8 @@ jobs:
       
     - name: netrc Create
       run: echo -e "machine git.heroku.com\n  login alikadirbagcioglu@gmail.com\n  password "$H_API_KEY >> ~/.netrc
+      env:
+        H_API_KEY: ${{ secrets.H_API_KEY }}
     
     - name: log 
       run: echo -e "machine git.heroku.com\n  login alikadirbagcioglu@gmail.com\n  password "$H_API_KEY
