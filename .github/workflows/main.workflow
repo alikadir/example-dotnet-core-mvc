@@ -1,6 +1,6 @@
 workflow "Asp.Net Core Build & Deploy" {
+  resolves = ["GitHub Action for Heroku"]
   on = "push"
-  resolves = ["Heroku Push"]
 }
 
 action "Setup Dotnet for use with actions" {
@@ -15,11 +15,4 @@ action "GitHub Action for Heroku" {
   secrets = ["ASPNETCORE_DB_PATH", "HEROKU_API_KEY"]
   runs = "heroku git:remote"
   args = "-a akb-first-dotnet-core-mvc"
-}
-
-action "Heroku Push" {
-  uses = "akb"
-  needs = ["GitHub Action for Heroku"]
-  runs = "git push heroku master"
-  secrets = ["HEROKU_API_KEY"]
 }
