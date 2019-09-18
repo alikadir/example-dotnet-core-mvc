@@ -9,24 +9,29 @@ jobs:
 
     steps:	
     - uses: actions/checkout@v1	
+    
     - name: Setup .NET Core	
       uses: actions/setup-dotnet@v1	
       with:	
         dotnet-version: 2.2.108	  
+        
     - name: Build with dotnet	
       run: dotnet build --configuration Release
+      
     - name: Setup Heroku
       run: brew tap heroku/brew && brew install heroku
-    - name: Login to Heroku
-      run: heroku login
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      
+    - name: netrc Create
+      run: echo -e "machine git.heroku.com\nlogin alikadirbagcioglu@gmail.com\npassword " + $H_API_KEY >> ~/.netrc
+     
     - name: Add Remote
       run: heroku git:remote -a akb-first-dotnet-core-mvc
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        
     - name: View git remotes
       run: git remote -v
+      
     - name: Push to Heroku
       run: git push heroku HEAD:master
       env:
