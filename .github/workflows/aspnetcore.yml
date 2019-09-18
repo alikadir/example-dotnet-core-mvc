@@ -28,4 +28,4 @@ jobs:
     - name: View git remotes
       run: git remote -v
     - name: Push to Heroku
-      run: git push heroku master
+      run: git push heroku HEAD:master
