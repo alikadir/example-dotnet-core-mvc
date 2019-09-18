@@ -1,0 +1,22 @@
+name: ASP.NET Core CI	
+
+on: [push]	
+
+jobs:	
+  build:	
+
+    runs-on: ubuntu-latest	
+
+    steps:	
+    - uses: actions/checkout@v1	
+    - name: Setup .NET Core	
+      uses: actions/setup-dotnet@v1	
+      with:	
+        dotnet-version: 2.2.108	
+    - name: Heroku Install	
+      run: | 	
+        sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh	
+        heroku git:remote -a akb-first-dotnet-core-mvc	
+        git push heroku master	
+    - name: Build with dotnet	
+      run: dotnet build --configuration Release
