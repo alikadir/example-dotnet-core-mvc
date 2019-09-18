@@ -19,6 +19,8 @@ jobs:
       uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: login
     - name: Remote add
       uses: actions/heroku@master
       env:
