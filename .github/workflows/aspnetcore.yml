@@ -1,4 +1,4 @@
-name: ASP.NET Core CI	
+name: ASP.NET Core Build & Deploy to Heroku	
 
 on: [push]	
 
@@ -12,11 +12,18 @@ jobs:
     - name: Setup .NET Core	
       uses: actions/setup-dotnet@v1	
       with:	
-        dotnet-version: 2.2.108	
-    - name: Heroku Install	
-      run: | 	
-        sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh	
-        heroku git:remote -a akb-first-dotnet-core-mvc	
-        git push heroku master	
+        dotnet-version: 2.2.108	  
     - name: Build with dotnet	
       run: dotnet build --configuration Release
+    - name: Login to Heroku     
+      uses: actions/heroku@master
+	    env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    - name: Remote add
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args:  git:remote -a akb-first-dotnet-core-mvc
+    - name: Push to Heroku
+      run: git push heroku master
