@@ -20,17 +20,11 @@ jobs:
       
     - name: Setup Heroku
       run: brew tap heroku/brew && brew install heroku
-      
-    - name: netrc Create
-      run: echo -e "machine git.heroku.com\n  login alikadirbagcioglu@gmail.com\n  password "$H_API_KEY >> ~/.netrc
-      env:
-        H_API_KEY: ${{ secrets.H_API_KEY }}
-    
-    - name: log 
-      run: cat ~/.netrc
            
     - name: Add Remote
-      run: heroku git:remote -a akb-first-dotnet-core-mvc
+      run: git remote add heroku https://heroku:$API_KEY@git.heroku.com/akb-first-dotnet-core-mvc.git
+      env:
+        API_KEY: ${{ secrets.H_API_KEY }}
              
     - name: View git remotes
       run: git remote -v
