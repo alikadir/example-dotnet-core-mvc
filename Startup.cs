@@ -38,16 +38,15 @@ namespace FirstDotnetCoreMVC
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             Console.WriteLine("gelen connection");
             Console.WriteLine(MyCon);
 
             
             services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
-            
-            
-            
+           
+           
             // services.AddDbContext<EmployeeDbContext>(item =>item.UseSqlServer(MyCon));
             
         }
