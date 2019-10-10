@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FirstDotnetCoreMVC.Middlewares;
 using FirstDotnetCoreMVC.Models;
+using FirstDotnetCoreMVC.Services.Math;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +24,6 @@ namespace FirstDotnetCoreMVC
 
         public Startup(IWebHostEnvironment env)
         {
-           
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -30,7 +31,7 @@ namespace FirstDotnetCoreMVC
                 .AddEnvironmentVariables(); // this step is important!
 
             Configuration = builder.Build();
-            
+
             MyCon = Configuration.GetSection("ASPNETCORE_DB_PATH").Value;
         }
 
@@ -41,6 +42,7 @@ namespace FirstDotnetCoreMVC
         {
             services.AddControllersWithViews();
             services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
+            services.AddSingleton<IMathService, SumService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,16 +62,18 @@ namespace FirstDotnetCoreMVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            
+
+            app.UseSampleMiddleware();
+
+
             app.UseRouting();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            
         }
     }
 }

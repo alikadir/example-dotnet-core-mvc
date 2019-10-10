@@ -1,4 +1,6 @@
-﻿@{
+﻿@using FirstDotnetCoreMVC.Services.Math
+@inject IMathService math
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
@@ -7,5 +9,6 @@
 
 <span style="display:none">@Startup.MyCon</span>
 
-<email domain="ali.com">blaablaa</email>
+<h2>@math.Math(3,5)</h2>
+
 
