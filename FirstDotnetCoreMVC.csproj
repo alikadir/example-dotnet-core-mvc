@@ -12,4 +12,10 @@
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="Pages\Components" />
+      <Folder Include="Views\Shared\Components" />
+    </ItemGroup>
+
 </Project>
