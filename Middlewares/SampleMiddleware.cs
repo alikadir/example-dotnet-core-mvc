@@ -10,7 +10,7 @@ namespace FirstDotnetCoreMVC.Middlewares
             app.Use(async (context, next) =>
             {
                 context.Response.Headers.Add("Server", "Dotnet Core");
-                next.Invoke();
+                await next.Invoke();
             });
             
             return app;

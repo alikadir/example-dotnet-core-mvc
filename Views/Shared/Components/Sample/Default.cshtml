@@ -1,2 +1,6 @@
-﻿@model System.Collections.Generic.List<FirstDotnetCoreMVC.Models.Employee>
+﻿@model System.Collections.Generic.List<string>
 
+@foreach (var item in Model)
+{
+    <p>@item</p>
+}

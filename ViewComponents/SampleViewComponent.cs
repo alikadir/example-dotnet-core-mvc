@@ -8,15 +8,15 @@ namespace FirstDotnetCoreMVC.ViewComponents
 {
     public class SampleViewComponent : ViewComponent
     {
-        public ViewViewComponentResult Invoke()
+        public ViewViewComponentResult Invoke(int count)
         {
-            List<Employee> employeeList;
-            using (var db = new EmployeeDbContext())
+            List<string> list = new List<string>()
             {
-                employeeList = db.Employees.ToList();
-            }
+                "ali", "veli", "osman", "nuri", "mehmet"
+            };
+           
 
-            return View(employeeList);
+            return View(list);
         }
     }
 }
