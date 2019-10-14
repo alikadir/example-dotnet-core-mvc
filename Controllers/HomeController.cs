@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FirstDotnetCoreMVC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace FirstDotnetCoreMVC.Controllers
 {
@@ -17,6 +18,7 @@ namespace FirstDotnetCoreMVC.Controllers
 
         public IActionResult Privacy()
         {
+            HttpContext.Session.SetString("SampleSessionKey", "SampleSessionValue");
             return View();
         }
 

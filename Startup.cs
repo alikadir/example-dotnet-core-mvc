@@ -43,6 +43,13 @@ namespace FirstDotnetCoreMVC
             services.AddControllersWithViews();
             services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
             services.AddSingleton<IMathService, SumService>();
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +69,8 @@ namespace FirstDotnetCoreMVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
+            
             app.UseSampleMiddleware();
 
 

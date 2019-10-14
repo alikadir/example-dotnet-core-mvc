@@ -1,5 +1,7 @@
 ﻿@using FirstDotnetCoreMVC.Services.Math
+@using Microsoft.AspNetCore.Http
 @inject IMathService math
+@inject IHttpContextAccessor myContext
 @{
     ViewData["Title"] = "Privacy Policy";
 }
@@ -16,3 +18,5 @@
 <vc:sample count="3"></vc:sample>
 
 @await Component.InvokeAsync("Sample",  4)
+
+<i>@myContext.HttpContext.Session.GetString("SampleSessionKey")</i>
