@@ -1,5 +1,5 @@
 ﻿
-namespace FirstDotnetCoreMVC.Models
+namespace FirstDotnetCoreMVC.Entities.Employee
 {
     public class EmployeeAddress
     {

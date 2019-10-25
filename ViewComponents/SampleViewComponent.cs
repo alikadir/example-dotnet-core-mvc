@@ -16,7 +16,7 @@ namespace FirstDotnetCoreMVC.ViewComponents
             };
            
 
-            return View(list);
+            return View(list); // Views > Shared > Components > Sample > Default.cshtml
         }
     }
 }

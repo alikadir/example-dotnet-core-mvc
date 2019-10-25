@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using FirstDotnetCoreMVC.Middlewares;
-using FirstDotnetCoreMVC.Models;
+using FirstDotnetCoreMVC.Entities.Employee;
+using FirstDotnetCoreMVC.Entities.Identity;
 using FirstDotnetCoreMVC.Services.Math;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +17,7 @@ namespace FirstDotnetCoreMVC
 {
     public class Startup
     {
-        public static string MyCon = "First value";
-
+        
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,7 +28,6 @@ namespace FirstDotnetCoreMVC
 
             Configuration = builder.Build();
 
-            MyCon = Configuration.GetSection("ASPNETCORE_DB_PATH").Value;
         }
 
         public IConfiguration Configuration { get; }
@@ -41,7 +36,7 @@ namespace FirstDotnetCoreMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<EmployeeDbContext>(item => item.UseNpgsql(MyCon));
+            services.AddDbContext<EmployeeDbContext>(options => options.UseNpgsql(Configuration.GetSection("ASPNETCORE_DB_PATH").Value));
             services.AddSingleton<IMathService, SumService>();
             
             services.AddDistributedMemoryCache();
@@ -50,6 +45,10 @@ namespace FirstDotnetCoreMVC
                 options.IdleTimeout = TimeSpan.FromHours(1);
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDbContext<CustomIdentityDbContext>(options =>
+                options.UseNpgsql(Configuration.GetSection("ASPNETCORE_IDENTITY_DB_PATH").Value));
+            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+                .AddEntityFrameworkStores<CustomIdentityDbContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +72,8 @@ namespace FirstDotnetCoreMVC
             
             app.UseSampleMiddleware();
 
+            app.UseAuthentication();
+                
 
             app.UseRouting();
 
