@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDotnetCoreMVC.Controllers
 {
+   
     public class SampleController : Controller
     {
-        // GET
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

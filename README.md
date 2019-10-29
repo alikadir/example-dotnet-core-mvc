@@ -10,15 +10,19 @@
 
 `cd FirstDotnetCoreMVC`
 
-_optional (already contains it in Microsoft.AspNetCore.App package)_ 
-
-`dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
+`dotnet add package Microsoft.EntityFrameworkCore`
+`dotnet add package Microsoft.EntityFrameworkCore.Design`
+`dotnet add package Microsoft.EntityFrameworkCore.SqlServer`
+_or_
+`dotnet add package Microsoft.EntityFrameworkCore`
+`dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL.Design`
+`dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`
 
 after create DbContext & Entities and also each changes, you should apply the flowing code
 
-`dotnet ef migrations add InitialCreate`
+`dotnet ef migrations add InitialCreate --context=EmployeeDbcontext`
 
-`dotnet ef database update`
+`dotnet ef database update --context=EmployeeDbcontext`
 
 if you use ConnectionString in EnvironmentVariables. 
 before execute database update, you should apply the flowing code

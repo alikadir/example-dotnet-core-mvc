@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FirstDotnetCoreMVC.Entities.Employee;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FirstDotnetCoreMVC.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly EmployeeDbContext _context;
@@ -19,6 +21,7 @@ namespace FirstDotnetCoreMVC.Controllers
         }
 
         // GET: Employee
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Employees.ToListAsync());

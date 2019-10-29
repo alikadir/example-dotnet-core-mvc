@@ -17,7 +17,6 @@ namespace FirstDotnetCoreMVC
 {
     public class Startup
     {
-        
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -27,7 +26,6 @@ namespace FirstDotnetCoreMVC
                 .AddEnvironmentVariables(); // this step is important!
 
             Configuration = builder.Build();
-
         }
 
         public IConfiguration Configuration { get; }
@@ -36,18 +34,27 @@ namespace FirstDotnetCoreMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<EmployeeDbContext>(options => options.UseNpgsql(Configuration.GetSection("ASPNETCORE_DB_PATH").Value));
-            services.AddSingleton<IMathService, SumService>();
-            
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromHours(1);
-            });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddDbContext<EmployeeDbContext>(options =>
+                options.UseNpgsql(Configuration.GetSection("ASPNETCORE_DB_PATH").Value));
+
             services.AddDbContext<CustomIdentityDbContext>(options =>
-                options.UseNpgsql(Configuration.GetSection("ASPNETCORE_IDENTITY_DB_PATH").Value));
-            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+                options.UseNpgsql(Configuration.GetSection("ASPNETCORE_DB_PATH").Value));
+
+            services.AddSingleton<IMathService, SumService>();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromHours(1); });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>(options =>
+                {
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 4;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                })
                 .AddEntityFrameworkStores<CustomIdentityDbContext>().AddDefaultTokenProviders();
         }
 
@@ -65,17 +72,18 @@ namespace FirstDotnetCoreMVC
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
-            
+
             app.UseSampleMiddleware();
 
-            app.UseAuthentication();
-                
-
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

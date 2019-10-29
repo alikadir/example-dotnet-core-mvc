@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -28,6 +30,7 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
+                     <li class="nav-item"><a class="nav-link text-dark">User: @Context.User.Identity.Name</a></li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
@@ -37,9 +40,19 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
                     </li>
-                      <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Sample" asp-action="Index">Sample</a>
-                                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Sample" asp-action="Index">Sample</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">LogOut</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
